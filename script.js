@@ -1,4 +1,4 @@
-Papa.parse('cpih_annual_1989_2025.csv', {
+Papa.parse('CPIH ANNUAL RATE 1989-2025', {
 
     download: true,
     header: true,
