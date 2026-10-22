@@ -16,6 +16,7 @@ Papa.parse('CPIH ANNUAL RATE 1989–2025.csv', {
 
         results.data.forEach(row => {
 
+            // Add data to the table
             const tr = document.createElement('tr');
 
             tr.innerHTML = `
@@ -25,54 +26,56 @@ Papa.parse('CPIH ANNUAL RATE 1989–2025.csv', {
 
             tbody.appendChild(tr);
 
+            // Store data for the chart
             years.push(row.Year);
             rates.push(Number(row.CPIHAnnualRate));
 
         });
 
-        new Chart(
-            document.getElementById('inflationChart'),
-            {
-                type: 'line',
+        // Create the chart
+        const ctx = document.getElementById('inflationChart');
 
-                data: {
-                    labels: years,
+        new Chart(ctx, {
 
-                    datasets: [{
-                        label: 'CPIH Annual Rate (%)',
-                        data: rates
-                    }]
-                },
+            type: 'line',
 
-                options: {
+            data: {
+                labels: years,
 
-                    responsive: true,
-                    maintainAspectRatio: false,
+                datasets: [{
+                    label: 'CPIH Annual Rate (%)',
+                    data: rates,
+                    tension: 0.2
+                }]
+            },
 
-                    scales: {
+            options: {
 
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Year'
-                            }
-                        },
+                responsive: true,
+                maintainAspectRatio: false,
 
-                        y: {
-                            beginAtZero: true,
+                scales: {
 
-                            title: {
-                                display: true,
-                                text: 'CPIH Annual Rate (%)'
-                            }
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Year'
                         }
+                    },
 
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'CPIH Annual Rate (%)'
+                        }
                     }
 
                 }
 
             }
-        );
+
+        });
 
     },
 
